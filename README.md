@@ -1,6 +1,6 @@
 РИОПК. Программное средство оценки эффективности HR-службы
 
-Лабораторная работа №1
+Архитектура
 
 ![c4-C4 Container drawio](https://github.com/user-attachments/assets/9cd72e0b-260b-4a20-ba7c-72c4ffca3114)
 Контейнерный уровень архитектуры в нотации C4
@@ -13,3 +13,7 @@ UI Kit
 
 ![диаграмма классов](https://github.com/user-attachments/assets/c522558c-5490-4e87-998f-cc595df0ae80)
 Диаграмма классов
+
+![бд](https://github.com/user-attachments/assets/86032051-fea9-4cd6-a1d2-80a849249781)
+Схема базы данных
+
