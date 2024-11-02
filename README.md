@@ -16,3 +16,12 @@
 
 ## Схема базы данных
 ![бд](https://github.com/user-attachments/assets/86032051-fea9-4cd6-a1d2-80a849249781)
+
+# Пользовательский интерфейс
+
+## User-flow диаграмма (Руководитель HR-службы)
+![user flow 1](https://github.com/user-attachments/assets/6890fb8b-e6d6-4998-924d-4110f2e3ed32)
+
+## User-flow диаграмма (HR-специалист)
+![user flow 2](https://github.com/user-attachments/assets/c690d91d-1d10-455a-b7e8-7bcd15dd5fb0)
+
