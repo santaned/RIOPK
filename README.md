@@ -23,5 +23,5 @@
 ![user flow 1](https://github.com/user-attachments/assets/6890fb8b-e6d6-4998-924d-4110f2e3ed32)
 
 ## User-flow диаграмма (HR-специалист)
-![user flow 2](https://github.com/user-attachments/assets/c690d91d-1d10-455a-b7e8-7bcd15dd5fb0)
+![user flow 2](https://github.com/user-attachments/assets/23c3a4fc-2582-45b1-ae30-8a6d5e38a5b3)
 
