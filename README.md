@@ -17,6 +17,21 @@
 ## Схема базы данных
 ![бд](https://github.com/user-attachments/assets/86032051-fea9-4cd6-a1d2-80a849249781)
 
+## Диаграмма компонентов
+![диаграмма компонентов](https://github.com/user-attachments/assets/c8d3b2f1-a226-4a80-9a8e-0566af5661fd)
+
+## Диаграмма развертывания
+![диаграмма развертывания](https://github.com/user-attachments/assets/90a6281f-0fa8-4848-96ae-eb165e373ddd)
+
+## Диаграмма вариантов использования
+![диаграмма вариантов использования](https://github.com/user-attachments/assets/237482f3-c563-4717-89a2-cc5141dacaa2)
+
+## Диаграмма деятельности
+![диаграмма деятельности](https://github.com/user-attachments/assets/8c418361-dde3-47a3-9d51-74e9498ce519)
+
+## Диаграмма состояний
+![диаграмма состояний](https://github.com/user-attachments/assets/2dfc42bc-b8c5-4dfc-b146-58cfdc064f1a)
+
 # Пользовательский интерфейс
 
 ## User-flow диаграмма (Руководитель HR-службы)
