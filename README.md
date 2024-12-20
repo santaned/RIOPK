@@ -40,3 +40,70 @@
 ## User-flow диаграмма (HR-специалист)
 ![user flow 2](https://github.com/user-attachments/assets/23c3a4fc-2582-45b1-ae30-8a6d5e38a5b3)
 
+# Документация 
+
+## Документация к API
+
+![image](https://github.com/user-attachments/assets/b9a18bd9-d417-46d6-b3dc-b29bea78de57)
+
+![image](https://github.com/user-attachments/assets/68f92c09-8232-4102-a063-4bb51c38bea9)
+
+![image](https://github.com/user-attachments/assets/98741b6e-6fc9-40d1-b153-82fcec158aca)
+
+![image](https://github.com/user-attachments/assets/599861e5-ac08-4dcf-9851-474de7cc983d)
+
+Расположение документации: http://localhost:8080/swagger-ui/index.html#/
+
+# Тестирование
+
+## Примеры юнит-тестов
+
+    @Test
+    public void testSaveDepartment() {
+        when(departmentService.saveDepartment(department)).thenReturn(department);
+
+        ResponseEntity<Department> response = departmentController.saveDepartment(department);
+
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals("HR", response.getBody().getName());
+    }
+
+    @Test
+    public void testUpdateDepartment() {
+        Department updatedDepartment = new Department(1L, "HR", "Updated Human Resources", null, null);
+        when(departmentService.updateDepartment(1L, updatedDepartment)).thenReturn(updatedDepartment);
+
+        ResponseEntity<Department> response = departmentController.updateDepartment(1L, updatedDepartment);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals("Updated Human Resources", response.getBody().getDescription());
+    }
+
+## Результат выполнения юнит-тестов
+
+![image](https://github.com/user-attachments/assets/e8986ca8-0d72-468f-ba3a-455bafb17156)
+
+## Примеры интеграционных тестов
+
+    @Test
+    public void testGetDepartment() throws Exception {
+        mockMvc.perform(get("/api/v1/department/{id}", department.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value(department.getName()))
+                .andExpect(jsonPath("$.description").value(department.getDescription()));
+    }
+
+    @Test
+    public void testDeleteDepartment() throws Exception {
+        mockMvc.perform(delete("/api/v1/department/{id}", department.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value(department.getName()))
+                .andExpect(jsonPath("$.description").value(department.getDescription()));
+    }
+
+## Результат выполнения интеграционных тестов
+
+![image](https://github.com/user-attachments/assets/a135e5ab-c20b-4a68-9541-fdddc636d5ee)
+
