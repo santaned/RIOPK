@@ -52,7 +52,7 @@
 
 ![image](https://github.com/user-attachments/assets/599861e5-ac08-4dcf-9851-474de7cc983d)
 
-Расположение документации: [http://localhost:8080/swagger-ui/index.html#/](https://github.com/santaned/RIOPK_HREfficiency/blob/main/APIDocumentation)
+Расположение документации: https://github.com/santaned/RIOPK_HREfficiency/blob/main/APIDocumentation
 
 # Тестирование
 
