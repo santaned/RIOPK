@@ -15,7 +15,8 @@
 ![диаграмма классов](https://github.com/user-attachments/assets/c522558c-5490-4e87-998f-cc595df0ae80)
 
 ## Схема базы данных
-![бд](https://github.com/user-attachments/assets/86032051-fea9-4cd6-a1d2-80a849249781)
+![бд](https://github.com/user-attachments/assets/04725253-444c-42a5-b120-9522c98bdecc)
+
 
 ## Диаграмма компонентов
 ![диаграмма компонентов](https://github.com/user-attachments/assets/c8d3b2f1-a226-4a80-9a8e-0566af5661fd)
