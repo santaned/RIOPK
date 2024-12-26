@@ -344,105 +344,6 @@
         }
       }
     },
-    "/api/v1/kpiValue/{id}": {
-      "get": {
-        "tags": [
-          "kpi-value-controller"
-        ],
-        "operationId": "getKPIValue",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/KPIValue"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "kpi-value-controller"
-        ],
-        "operationId": "deleteKPIValue",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/KPIValue"
-                }
-              }
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "kpi-value-controller"
-        ],
-        "operationId": "updateKPIValue",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/KPIValue"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/KPIValue"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/kpi/{id}": {
       "get": {
         "tags": [
@@ -763,6 +664,40 @@
         }
       }
     },
+    "/api/v1/position/{id}/employees": {
+      "get": {
+        "tags": [
+          "position-controller"
+        ],
+        "operationId": "getEmployeesByPosition",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Employee"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/kpis": {
       "get": {
         "tags": [
@@ -786,12 +721,23 @@
         }
       }
     },
-    "/api/v1/kpiValues": {
+    "/api/v1/kpi/{id}/kpi_values": {
       "get": {
         "tags": [
-          "kpi-value-controller"
+          "kpi-controller"
         ],
-        "operationId": "getKPIValues",
+        "operationId": "getKPIValuesByKPI",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -832,6 +778,40 @@
         }
       }
     },
+    "/api/v1/employee/{id}/kpi_values": {
+      "get": {
+        "tags": [
+          "employee-controller"
+        ],
+        "operationId": "getKPIValuesByEmployee",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KPIValue"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/departments": {
       "get": {
         "tags": [
@@ -847,6 +827,108 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/Department"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/department/{id}/positions": {
+      "get": {
+        "tags": [
+          "department-controller"
+        ],
+        "operationId": "getPositionsByDepartment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Position"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/department/{id}/kpis": {
+      "get": {
+        "tags": [
+          "department-controller"
+        ],
+        "operationId": "getKPIsByDepartment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KPI"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/department/{id}/employees": {
+      "get": {
+        "tags": [
+          "department-controller"
+        ],
+        "operationId": "getEmployeesByDepartment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Employee"
                   }
                 }
               }
@@ -884,188 +966,46 @@
           }
         }
       }
+    },
+    "/api/v1/kpiValue/{id}": {
+      "delete": {
+        "tags": [
+          "kpi-value-controller"
+        ],
+        "operationId": "deleteKPIValue",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/KPIValue"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
-      "Department": {
-        "required": [
-          "description",
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "employees": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Employee"
-            }
-          },
-          "kpis": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/KPI"
-            }
-          }
-        }
-      },
-      "Employee": {
-        "required": [
-          "email"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "username": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          },
-          "roles": {
-            "type": "string",
-            "enum": [
-              "Director",
-              "HRManager"
-            ]
-          },
-          "firstName": {
-            "type": "string"
-          },
-          "lastName": {
-            "type": "string"
-          },
-          "lastLoginDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "registrationDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "position": {
-            "$ref": "#/components/schemas/Position"
-          },
-          "department": {
-            "$ref": "#/components/schemas/Department"
-          },
-          "kpiValues": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/KPIValue"
-            }
-          },
-          "user": {
-            "$ref": "#/components/schemas/User"
-          }
-        }
-      },
       "GrantedAuthority": {
         "type": "object",
         "properties": {
           "authority": {
             "type": "string"
-          }
-        }
-      },
-      "KPI": {
-        "required": [
-          "description",
-          "measurementUnit",
-          "name",
-          "targetValue"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "targetValue": {
-            "type": "number",
-            "format": "float"
-          },
-          "measurementUnit": {
-            "type": "string"
-          },
-          "department": {
-            "$ref": "#/components/schemas/Department"
-          },
-          "kpiValues": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/KPIValue"
-            }
-          }
-        }
-      },
-      "KPIValue": {
-        "required": [
-          "actualValue"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "actualValue": {
-            "type": "number",
-            "format": "float"
-          },
-          "date": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "kpi": {
-            "$ref": "#/components/schemas/KPI"
-          },
-          "employee": {
-            "$ref": "#/components/schemas/Employee"
-          }
-        }
-      },
-      "Position": {
-        "required": [
-          "description",
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "employees": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Employee"
-            }
           }
         }
       },
@@ -1139,9 +1079,6 @@
               "$ref": "#/components/schemas/Token"
             }
           },
-          "employee": {
-            "$ref": "#/components/schemas/Employee"
-          },
           "enabled": {
             "type": "boolean"
           },
@@ -1151,13 +1088,13 @@
               "$ref": "#/components/schemas/GrantedAuthority"
             }
           },
-          "accountNonLocked": {
-            "type": "boolean"
-          },
           "credentialsNonExpired": {
             "type": "boolean"
           },
           "accountNonExpired": {
+            "type": "boolean"
+          },
+          "accountNonLocked": {
             "type": "boolean"
           }
         }
@@ -1173,6 +1110,150 @@
           },
           "message": {
             "type": "string"
+          }
+        }
+      },
+      "Employee": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "roles": {
+            "type": "string",
+            "enum": [
+              "Director",
+              "HRManager"
+            ]
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "lastLoginDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "registrationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "kpiValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KPIValue"
+            }
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          }
+        }
+      },
+      "KPIValue": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "actualValue": {
+            "type": "number",
+            "format": "float"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Position": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "employees": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Employee"
+            }
+          }
+        }
+      },
+      "KPI": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "measurementUnit": {
+            "type": "string"
+          },
+          "targetValue": {
+            "type": "number",
+            "format": "float"
+          },
+          "kpiValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KPIValue"
+            }
+          }
+        }
+      },
+      "Department": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "employees": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Employee"
+            }
+          },
+          "kpis": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KPI"
+            }
+          },
+          "positions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Position"
+            }
           }
         }
       }
