@@ -1,24 +1,31 @@
 package com.example.new_hr_efficiency.controller;
 
 import com.example.new_hr_efficiency.model.Department;
+import com.example.new_hr_efficiency.model.Employee;
+import com.example.new_hr_efficiency.model.KPI;
+import com.example.new_hr_efficiency.model.Position;
 import com.example.new_hr_efficiency.service.DepartmentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-@ExtendWith(MockitoExtension.class)
-public class DepartmentControllerTest {
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+class DepartmentControllerUnitTest {
+
+    private MockMvc mockMvc;
 
     @Mock
     private DepartmentService departmentService;
@@ -26,67 +33,86 @@ public class DepartmentControllerTest {
     @InjectMocks
     private DepartmentController departmentController;
 
-    private Department department;
-
     @BeforeEach
-    public void setUp() {
-        department = new Department(1L, "HR", "Human Resources", null, null);
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(departmentController).build();
     }
 
     @Test
-    public void testSaveDepartment() {
-        when(departmentService.saveDepartment(department)).thenReturn(department);
+    void shouldSaveDepartment() throws Exception {
+        Department department = new Department(1L, "IT", "IT Department", Collections.emptyList(), Collections.emptyList(), Collections.emptyList());
+        when(departmentService.saveDepartment(any(Department.class))).thenReturn(department);
 
-        ResponseEntity<Department> response = departmentController.saveDepartment(department);
-
-        assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertNotNull(response.getBody());
-        assertEquals("HR", response.getBody().getName());
+        mockMvc.perform(post("/api/v1/department")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"name\":\"IT\",\"description\":\"IT Department\"}"))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.name").value("IT"));
     }
 
     @Test
-    public void testGetDepartment() {
+    void shouldGetDepartmentById() throws Exception {
+        Department department = new Department(1L, "IT", "IT Department", Collections.emptyList(), Collections.emptyList(), Collections.emptyList());
         when(departmentService.getDepartment(1L)).thenReturn(department);
 
-        ResponseEntity<Department> response = departmentController.getDepartment(1L);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertNotNull(response.getBody());
-        assertEquals("HR", response.getBody().getName());
+        mockMvc.perform(get("/api/v1/department/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.name").value("IT"));
     }
 
     @Test
-    public void testGetDepartments() {
-        List<Department> departments = Arrays.asList(department);
-        when(departmentService.getDepartments()).thenReturn(departments);
+    void shouldReturnNotFoundForInvalidDepartmentId() throws Exception {
+        when(departmentService.getDepartment(1L)).thenThrow(new RuntimeException("Department not found"));
 
-        List<Department> response = departmentController.getDepartments();
-
-        assertNotNull(response);
-        assertEquals(1, response.size());
-        assertEquals("HR", response.get(0).getName());
+        mockMvc.perform(get("/api/v1/department/1"))
+                .andExpect(status().isNotFound());
     }
 
     @Test
-    public void testUpdateDepartment() {
-        Department updatedDepartment = new Department(1L, "HR", "Updated Human Resources", null, null);
-        when(departmentService.updateDepartment(1L, updatedDepartment)).thenReturn(updatedDepartment);
+    void shouldGetAllDepartments() throws Exception {
+        Department department = new Department(1L, "IT", "IT Department", Collections.emptyList(), Collections.emptyList(), Collections.emptyList());
+        when(departmentService.getDepartments()).thenReturn(Collections.singletonList(department));
 
-        ResponseEntity<Department> response = departmentController.updateDepartment(1L, updatedDepartment);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertNotNull(response.getBody());
-        assertEquals("Updated Human Resources", response.getBody().getDescription());
+        mockMvc.perform(get("/api/v1/departments"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", org.hamcrest.Matchers.hasSize(1)))
+                .andExpect(jsonPath("$[0].name").value("IT"));
     }
 
     @Test
-    public void testDeleteDepartment() {
+    void shouldUpdateDepartment() throws Exception {
+        Department department = new Department(1L, "Updated IT", "Updated IT Department", Collections.emptyList(), Collections.emptyList(), Collections.emptyList());
+        when(departmentService.updateDepartment(eq(1L), any(Department.class))).thenReturn(department);
+
+        mockMvc.perform(patch("/api/v1/department/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"name\":\"Updated IT\",\"description\":\"Updated IT Department\"}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("Updated IT"));
+    }
+
+    @Test
+    void shouldDeleteDepartment() throws Exception {
+        Department department = new Department(1L, "IT", "IT Department", Collections.emptyList(), Collections.emptyList(), Collections.emptyList());
         when(departmentService.deleteDepartment(1L)).thenReturn(department);
 
-        ResponseEntity<Department> response = departmentController.deleteDepartment(1L);
+        mockMvc.perform(delete("/api/v1/department/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("IT"));
+    }
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertNotNull(response.getBody());
-        assertEquals("HR", response.getBody().getName());
+    @Test
+    void shouldGetPositionsByDepartmentId() throws Exception {
+        Position position = new Position(1L, "Position Name", "Position Description", null);
+        Department department = new Department(1L, "IT", "IT Department", Collections.emptyList(), Collections.emptyList(), List.of(position));
+        when(departmentService.getDepartment(1L)).thenReturn(department);
+
+        mockMvc.perform(get("/api/v1/department/1/positions"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", org.hamcrest.Matchers.hasSize(1)))
+                .andExpect(jsonPath("$[0].name").value("Position Name"));
     }
 }

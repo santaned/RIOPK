@@ -43,4 +43,7 @@ public class KPI {
 
     public KPI(long l, String kpiName, String kpiDescription, double v, double v1) {
     }
+
+    public KPI(long l, String kpiName, String kpiDescription, Object o) {
+    }
 }

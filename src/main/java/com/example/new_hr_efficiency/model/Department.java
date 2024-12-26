@@ -41,4 +41,6 @@ public class Department {
     @JoinColumn(name = "department_id")
     private List<Position> positions;
 
+    public Department(Object o, String s, String informationTechnology, Object o1, Object o2) {
+    }
 }

@@ -55,4 +55,6 @@ public class Employee {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public Employee(long l, String johnDoe, String mail, String number, Object o) {
+    }
 }
