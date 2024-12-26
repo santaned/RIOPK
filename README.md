@@ -42,10 +42,10 @@
 ![image](https://github.com/user-attachments/assets/d2d9d7fe-0e5c-4599-8539-629bf47e51d7)
 
 ### User-flow диаграмма (Руководитель HR-службы)
-![user flow 1](https://github.com/user-attachments/assets/6890fb8b-e6d6-4998-924d-4110f2e3ed32)
+![user flow-user flow 1 drawio](https://github.com/user-attachments/assets/b3f87d47-f612-4518-8f89-7153aae92036)
 
 ### User-flow диаграмма (HR-специалист)
-![user flow 2](https://github.com/user-attachments/assets/23c3a4fc-2582-45b1-ae30-8a6d5e38a5b3)
+![user flow-user flow 2 drawio](https://github.com/user-attachments/assets/364cce24-dba5-48e2-bf4c-e6fb7bfeac22)
 
 # Документация 
 
