@@ -1,10 +1,10 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "HREfficiency",
-    "description": "HREfficiency documentation",
+    "title": "HireEase",
+    "description": "HireEase documentation",
     "contact": {
-      "url": "https://github.com/santaned/RIOPK_HREfficiency"
+      "url": "https://github.com/taesoftlers/RIOPK_HiringCandidates"
     },
     "version": "1.0"
   },
@@ -15,6 +15,66 @@
     }
   ],
   "paths": {
+    "/api/v1/vacancy": {
+      "post": {
+        "tags": [
+          "vacancy-controller"
+        ],
+        "operationId": "saveVacancy",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Vacancy"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vacancy"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/resume": {
+      "post": {
+        "tags": [
+          "resume-controller"
+        ],
+        "operationId": "saveResume",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Resume"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resume"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/register": {
       "post": {
         "tags": [
@@ -65,36 +125,6 @@
         }
       }
     },
-    "/api/v1/position": {
-      "post": {
-        "tags": [
-          "position-controller"
-        ],
-        "operationId": "savePosition",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Position"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/Position"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/login": {
       "post": {
         "tags": [
@@ -125,17 +155,17 @@
         }
       }
     },
-    "/api/v1/kpi": {
+    "/api/v1/interview": {
       "post": {
         "tags": [
-          "kpi-controller"
+          "interview-controller"
         ],
-        "operationId": "saveKPI",
+        "operationId": "saveInterview",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/KPI"
+                "$ref": "#/components/schemas/Interview"
               }
             }
           },
@@ -147,37 +177,7 @@
             "content": {
               "*/*": {
                 "schema": {
-                  "$ref": "#/components/schemas/KPI"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/kpiValue": {
-      "post": {
-        "tags": [
-          "kpi-value-controller"
-        ],
-        "operationId": "saveKPIValue",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/KPIValue"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/KPIValue"
+                  "$ref": "#/components/schemas/Interview"
                 }
               }
             }
@@ -245,86 +245,17 @@
         }
       }
     },
-    "/api/v1/position/{id}": {
-      "get": {
+    "/api/v1/candidate": {
+      "post": {
         "tags": [
-          "position-controller"
+          "candidate-controller"
         ],
-        "operationId": "getPosition",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/Position"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "position-controller"
-        ],
-        "operationId": "deletePosition",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/Position"
-                }
-              }
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "position-controller"
-        ],
-        "operationId": "updatePosition",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
+        "operationId": "saveCandidate",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Position"
+                "$ref": "#/components/schemas/Candidate"
               }
             }
           },
@@ -336,7 +267,7 @@
             "content": {
               "*/*": {
                 "schema": {
-                  "$ref": "#/components/schemas/Position"
+                  "$ref": "#/components/schemas/Candidate"
                 }
               }
             }
@@ -344,12 +275,12 @@
         }
       }
     },
-    "/api/v1/kpi/{id}": {
+    "/api/v1/vacancy/{id}": {
       "get": {
         "tags": [
-          "kpi-controller"
+          "vacancy-controller"
         ],
-        "operationId": "getKPI",
+        "operationId": "getVacancy",
         "parameters": [
           {
             "name": "id",
@@ -367,7 +298,7 @@
             "content": {
               "*/*": {
                 "schema": {
-                  "$ref": "#/components/schemas/KPI"
+                  "$ref": "#/components/schemas/Vacancy"
                 }
               }
             }
@@ -376,9 +307,9 @@
       },
       "delete": {
         "tags": [
-          "kpi-controller"
+          "vacancy-controller"
         ],
-        "operationId": "deleteKPI",
+        "operationId": "deleteVacancy",
         "parameters": [
           {
             "name": "id",
@@ -396,7 +327,7 @@
             "content": {
               "*/*": {
                 "schema": {
-                  "$ref": "#/components/schemas/KPI"
+                  "$ref": "#/components/schemas/Vacancy"
                 }
               }
             }
@@ -405,9 +336,9 @@
       },
       "patch": {
         "tags": [
-          "kpi-controller"
+          "vacancy-controller"
         ],
-        "operationId": "updateKPI",
+        "operationId": "updateVacancy",
         "parameters": [
           {
             "name": "id",
@@ -423,7 +354,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/KPI"
+                "$ref": "#/components/schemas/Vacancy"
               }
             }
           },
@@ -435,7 +366,106 @@
             "content": {
               "*/*": {
                 "schema": {
-                  "$ref": "#/components/schemas/KPI"
+                  "$ref": "#/components/schemas/Vacancy"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/interview/{id}": {
+      "get": {
+        "tags": [
+          "interview-controller"
+        ],
+        "operationId": "getInterview",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Interview"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "interview-controller"
+        ],
+        "operationId": "deleteInterview",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Interview"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "interview-controller"
+        ],
+        "operationId": "updateInterview",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Interview"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Interview"
                 }
               }
             }
@@ -641,35 +671,12 @@
         }
       }
     },
-    "/api/v1/positions": {
+    "/api/v1/candidate/{id}": {
       "get": {
         "tags": [
-          "position-controller"
+          "candidate-controller"
         ],
-        "operationId": "getPositions",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Position"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/position/{id}/employees": {
-      "get": {
-        "tags": [
-          "position-controller"
-        ],
-        "operationId": "getEmployeesByPosition",
+        "operationId": "getCandidate",
         "parameters": [
           {
             "name": "id",
@@ -687,46 +694,18 @@
             "content": {
               "*/*": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Employee"
-                  }
+                  "$ref": "#/components/schemas/Candidate"
                 }
               }
             }
           }
         }
-      }
-    },
-    "/api/v1/kpis": {
-      "get": {
+      },
+      "delete": {
         "tags": [
-          "kpi-controller"
+          "candidate-controller"
         ],
-        "operationId": "getKPIs",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/KPI"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/kpi/{id}/kpi_values": {
-      "get": {
-        "tags": [
-          "kpi-controller"
-        ],
-        "operationId": "getKPIValuesByKPI",
+        "operationId": "deleteCandidate",
         "parameters": [
           {
             "name": "id",
@@ -744,9 +723,91 @@
             "content": {
               "*/*": {
                 "schema": {
+                  "$ref": "#/components/schemas/Candidate"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "candidate-controller"
+        ],
+        "operationId": "updateCandidate",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Candidate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Candidate"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/vacancies": {
+      "get": {
+        "tags": [
+          "vacancy-controller"
+        ],
+        "operationId": "getVacancies",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/KPIValue"
+                    "$ref": "#/components/schemas/Vacancy"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/interviews": {
+      "get": {
+        "tags": [
+          "interview-controller"
+        ],
+        "operationId": "getInterviews",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Interview"
                   }
                 }
               }
@@ -778,12 +839,12 @@
         }
       }
     },
-    "/api/v1/employee/{id}/kpi_values": {
+    "/api/v1/employee/{id}/vacancies": {
       "get": {
         "tags": [
           "employee-controller"
         ],
-        "operationId": "getKPIValuesByEmployee",
+        "operationId": "getVacanciesByEmployee",
         "parameters": [
           {
             "name": "id",
@@ -803,7 +864,109 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/KPIValue"
+                    "$ref": "#/components/schemas/Vacancy"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/employee/{id}/resumes": {
+      "get": {
+        "tags": [
+          "employee-controller"
+        ],
+        "operationId": "getResumesByEmployee",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Resume"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/employee/{id}/interviews": {
+      "get": {
+        "tags": [
+          "employee-controller"
+        ],
+        "operationId": "getInterviewsByEmployee",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Interview"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/employee/{id}/candidates": {
+      "get": {
+        "tags": [
+          "employee-controller"
+        ],
+        "operationId": "getCandidatesByEmployee",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Candidate"
                   }
                 }
               }
@@ -827,74 +990,6 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/Department"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/department/{id}/positions": {
-      "get": {
-        "tags": [
-          "department-controller"
-        ],
-        "operationId": "getPositionsByDepartment",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Position"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/department/{id}/kpis": {
-      "get": {
-        "tags": [
-          "department-controller"
-        ],
-        "operationId": "getKPIsByDepartment",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/KPI"
                   }
                 }
               }
@@ -937,6 +1032,128 @@
         }
       }
     },
+    "/api/v1/department/{id}/candidates": {
+      "get": {
+        "tags": [
+          "department-controller"
+        ],
+        "operationId": "getCandidatesByDepartment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Candidate"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/candidates": {
+      "get": {
+        "tags": [
+          "candidate-controller"
+        ],
+        "operationId": "getCandidates",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Candidate"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/candidate/{id}/resume": {
+      "get": {
+        "tags": [
+          "candidate-controller"
+        ],
+        "operationId": "getResumeByCandidate",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resume"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/candidate/{id}/interviews": {
+      "get": {
+        "tags": [
+          "candidate-controller"
+        ],
+        "operationId": "getInterviewsByCandidate",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Interview"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/activate/{code}": {
       "get": {
         "tags": [
@@ -967,12 +1184,12 @@
         }
       }
     },
-    "/api/v1/kpiValue/{id}": {
+    "/api/v1/resume/{id}": {
       "delete": {
         "tags": [
-          "kpi-value-controller"
+          "resume-controller"
         ],
-        "operationId": "deleteKPIValue",
+        "operationId": "deleteResume",
         "parameters": [
           {
             "name": "id",
@@ -990,7 +1207,7 @@
             "content": {
               "*/*": {
                 "schema": {
-                  "$ref": "#/components/schemas/KPIValue"
+                  "$ref": "#/components/schemas/Resume"
                 }
               }
             }
@@ -1001,6 +1218,54 @@
   },
   "components": {
     "schemas": {
+      "Vacancy": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "jobTitle": {
+            "type": "string"
+          },
+          "jobDescription": {
+            "type": "string"
+          },
+          "workExperience": {
+            "type": "string"
+          },
+          "education": {
+            "type": "string"
+          },
+          "skills": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Resume": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "resumeFile": {
+            "type": "object",
+            "properties": {
+              "binaryStream": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
       "GrantedAuthority": {
         "type": "object",
         "properties": {
@@ -1082,20 +1347,20 @@
           "enabled": {
             "type": "boolean"
           },
+          "accountNonExpired": {
+            "type": "boolean"
+          },
+          "credentialsNonExpired": {
+            "type": "boolean"
+          },
+          "accountNonLocked": {
+            "type": "boolean"
+          },
           "authorities": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GrantedAuthority"
             }
-          },
-          "credentialsNonExpired": {
-            "type": "boolean"
-          },
-          "accountNonExpired": {
-            "type": "boolean"
-          },
-          "accountNonLocked": {
-            "type": "boolean"
           }
         }
       },
@@ -1113,17 +1378,72 @@
           }
         }
       },
-      "Employee": {
+      "Interview": {
         "type": "object",
         "properties": {
           "id": {
             "type": "integer",
             "format": "int64"
           },
-          "username": {
+          "interviewName": {
+            "type": "string"
+          },
+          "date_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "string"
+          },
+          "report": {
+            "type": "string"
+          }
+        }
+      },
+      "Candidate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "address": {
             "type": "string"
           },
           "email": {
+            "type": "string"
+          },
+          "resume": {
+            "$ref": "#/components/schemas/Resume"
+          },
+          "interviews": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Interview"
+            }
+          }
+        }
+      },
+      "Employee": {
+        "required": [
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "contactInfo": {
             "type": "string"
           },
           "roles": {
@@ -1133,10 +1453,10 @@
               "HRManager"
             ]
           },
-          "firstName": {
+          "username": {
             "type": "string"
           },
-          "lastName": {
+          "email": {
             "type": "string"
           },
           "lastLoginDate": {
@@ -1147,84 +1467,39 @@
             "type": "string",
             "format": "date-time"
           },
-          "kpiValues": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/KPIValue"
-            }
-          },
           "user": {
             "$ref": "#/components/schemas/User"
-          }
-        }
-      },
-      "KPIValue": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
           },
-          "actualValue": {
-            "type": "number",
-            "format": "float"
-          },
-          "date": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "Position": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "employees": {
+          "candidates": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Employee"
+              "$ref": "#/components/schemas/Candidate"
             }
-          }
-        }
-      },
-      "KPI": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
           },
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "measurementUnit": {
-            "type": "string"
-          },
-          "targetValue": {
-            "type": "number",
-            "format": "float"
-          },
-          "kpiValues": {
+          "vacancies": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/KPIValue"
+              "$ref": "#/components/schemas/Vacancy"
+            }
+          },
+          "interviews": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Interview"
+            }
+          },
+          "resumes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Resume"
             }
           }
         }
       },
       "Department": {
+        "required": [
+          "name"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -1243,16 +1518,10 @@
               "$ref": "#/components/schemas/Employee"
             }
           },
-          "kpis": {
+          "candidates": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/KPI"
-            }
-          },
-          "positions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Position"
+              "$ref": "#/components/schemas/Candidate"
             }
           }
         }
