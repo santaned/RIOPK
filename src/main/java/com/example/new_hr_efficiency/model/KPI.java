@@ -1,8 +1,6 @@
 package com.example.new_hr_efficiency.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,28 +21,24 @@ public class KPI {
     @Column(name = "id")
     private Long id;
 
-    @NotBlank(message = "Name of KPI can not be null")
-    @Column(name = "name", unique = true, nullable = false)
+    //    @NotBlank(message = "Name of KPI can not be null")
+    @Column(name = "name")
     private String name;
 
-    @NotBlank(message = "Description of KPI can not be null")
-    @Column(name = "description", unique = true, nullable = false)
+    //    @NotBlank(message = "Description of KPI can not be null")
+    @Column(name = "description")
     private String description;
 
-    @NotNull(message = "Target value of KPI can not be null")
-    @Column(name = "targetValue", nullable = false)
-    private Float targetValue;
-
-    @NotBlank(message = "Description of KPI can not be null")
-    @Column(name = "measurement_unit", nullable = false)
+    //    @NotBlank(message = "Description of KPI can not be null")
+    @Column(name = "measurement_unit")
     private String measurementUnit;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "department_id")
-    private Department department;
+    //    @NotNull(message = "Target value of KPI can not be null")
+    @Column(name = "targetValue")
+    private Float targetValue;
 
-    @OneToMany(cascade = CascadeType.ALL,
-            mappedBy = "kpi")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "kpi_id")
     private List<KPIValue> kpiValues;
 
     public KPI(long l, String kpiName, String kpiDescription, double v, double v1) {

@@ -1,7 +1,6 @@
 package com.example.new_hr_efficiency.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,20 +21,24 @@ public class Department {
     @Column(name = "id")
     private Long id;
 
-    @NotBlank(message = "Name of department can not be null")
-    @Column(name = "name", unique = true, nullable = false)
+    //    @NotBlank(message = "Name of department can not be null")
+    @Column(name = "name")
     private String name;
 
-    @NotBlank(message = "Description of department can not be null")
-    @Column(name = "description", unique = true, nullable = false)
+    //    @NotBlank(message = "Description of department can not be null")
+    @Column(name = "description")
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL,
-            mappedBy = "department")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "department_id")
     private List<Employee> employees;
 
-    @OneToMany(cascade = CascadeType.ALL,
-            mappedBy = "department")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "department_id")
     private List<KPI> kpis;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "department_id")
+    private List<Position> positions;
 
 }

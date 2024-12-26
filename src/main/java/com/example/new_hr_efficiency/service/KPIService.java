@@ -1,6 +1,7 @@
 package com.example.new_hr_efficiency.service;
 
 import com.example.new_hr_efficiency.model.KPI;
+import com.example.new_hr_efficiency.repository.DepartmentRepository;
 import com.example.new_hr_efficiency.repository.KPIRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ public class KPIService {
 
     @Autowired
     private KPIRepository kpiRepository;
+
+    @Autowired
+    private DepartmentRepository departmentRepository;
 
     public List<KPI> getKPIs() {
         return kpiRepository.findAll();
@@ -35,6 +39,7 @@ public class KPIService {
         existingKPI.setDescription(kpi.getDescription());
         existingKPI.setTargetValue(kpi.getTargetValue());
         existingKPI.setMeasurementUnit(kpi.getMeasurementUnit());
+        existingKPI.setKpiValues(kpi.getKpiValues());
         return kpiRepository.save(existingKPI);
     }
 

@@ -33,6 +33,7 @@ public class PositionService {
                 .orElseThrow(() -> new RuntimeException("Position not found"));
         existingPosition.setName(position.getName());
         existingPosition.setDescription(position.getDescription());
+        existingPosition.setEmployees(position.getEmployees());
         return positionRepository.save(existingPosition);
     }
 

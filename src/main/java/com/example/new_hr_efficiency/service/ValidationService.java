@@ -15,11 +15,11 @@ public class ValidationService {
 
     private final Validator validator;
 
-    public <T> void validationRequest(T request){
+    public <T> void validationRequest(T request) {
 
-        if(request != null){
+        if (request != null) {
             Set<ConstraintViolation<T>> result = validator.validate(request);
-            if(!result.isEmpty()){
+            if (!result.isEmpty()) {
                 String resultValidations = result.stream()
                         .map(ConstraintViolation::getMessage)
                         .reduce((s1, s2) -> s1 + ". " + s2).orElse("");

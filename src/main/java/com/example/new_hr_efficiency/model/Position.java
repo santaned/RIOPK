@@ -1,7 +1,6 @@
 package com.example.new_hr_efficiency.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,16 +21,16 @@ public class Position {
     @Column(name = "id")
     private Long id;
 
-    @NotBlank(message = "Name of position can not be null")
-    @Column(name = "name", unique = true, nullable = false)
+    //    @NotBlank(message = "Name of position can not be null")
+    @Column(name = "name")
     private String name;
 
-    @NotBlank(message = "Description of position can not be null")
-    @Column(name = "description", unique = true, nullable = false)
+    //    @NotBlank(message = "Description of position can not be null")
+    @Column(name = "description")
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL,
-            mappedBy = "position")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "position_id")
     private List<Employee> employees;
 
 }

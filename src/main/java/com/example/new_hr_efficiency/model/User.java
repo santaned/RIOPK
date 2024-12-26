@@ -44,11 +44,9 @@ public class User implements UserDetails {
     @Column(name = "is_active")
     private Boolean isActive;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
     private List<Token> tokens;
-
-    @OneToOne(mappedBy = "user")
-    private Employee employee;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -1,6 +1,7 @@
 package com.example.new_hr_efficiency.service;
 
 import com.example.new_hr_efficiency.model.Employee;
+import com.example.new_hr_efficiency.repository.DepartmentRepository;
 import com.example.new_hr_efficiency.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ public class EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private DepartmentRepository departmentRepository;
 
     public List<Employee> getEmployees() {
         return employeeRepository.findAll();
@@ -33,8 +37,7 @@ public class EmployeeService {
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
         existingEmployee.setFirstName(employee.getFirstName());
         existingEmployee.setLastName(employee.getLastName());
-        existingEmployee.setPosition(employee.getPosition());
-        existingEmployee.setDepartment(employee.getDepartment());
+        existingEmployee.setKpiValues(employee.getKpiValues());
         return employeeRepository.save(existingEmployee);
     }
 
