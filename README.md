@@ -180,16 +180,16 @@ public class SecurityConfig {
 
 Dockerfile для сервиса на Java:
 
-# Используем официальный образ OpenJDK
+### Используем официальный образ OpenJDK
 FROM openjdk:11-jre-slim
 
-# Устанавливаем рабочую директорию
+### Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем JAR файл приложения
+### Копируем JAR файл приложения
 COPY target/my-java-app.jar app.jar
 
-# Указываем команду для запуска приложения
+### Указываем команду для запуска приложения
 CMD ["java", "-jar", "app.jar"]
 Docker-compose:
 
